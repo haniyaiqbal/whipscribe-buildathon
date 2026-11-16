@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendar connect, next pass</title>
+<style>
+  :root { --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --lime:#c4f04a; --green:#3f6212; --soft:#f7fbe9; --amber:#fef3c7; --amberInk:#92400e; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.45 Inter, system-ui, sans-serif; color:var(--ink); background:#eef0f3; }
+  .wrap { display:flex; gap:24px; padding:24px; flex-wrap:wrap; justify-content:center; }
+  .phone { width:375px; min-height:760px; background:#fff; border-radius:28px; box-shadow:0 8px 30px rgba(0,0,0,.12); overflow:hidden; position:relative; }
+  .cap { text-align:center; font-weight:700; margin:0 0 8px; }
+  .col { display:flex; flex-direction:column; align-items:center; }
+  .nav { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); font-weight:700; }
+  .logo { width:28px; height:28px; border-radius:8px; background:var(--lime); display:grid; place-items:center; }
+  .pad { padding:20px 16px; }
+  h1 { font-size:26px; line-height:1.15; text-align:center; margin:8px 0 10px; }
+  .lead { color:var(--muted); text-align:center; margin:0 0 20px; }
+  .card { border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:12px; }
+  .card h3 { margin:0 0 4px; font-size:16px; }
+  .card p { margin:0 0 12px; color:var(--muted); font-size:14px; }
+  .btn { display:block; width:100%; min-height:48px; border-radius:999px; border:0; font:600 15px Inter, system-ui; background:var(--lime); color:var(--ink); }
+  .btn.ghost { background:#fff; border:1px solid var(--line); }
+  .sheet-bg { position:absolute; inset:0; background:rgba(17,24,39,.45); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:20px 20px 0 0; padding:20px 16px 28px; }
+  .grab { width:40px; height:4px; border-radius:4px; background:var(--line); margin:0 auto 16px; }
+  .sheet h2 { margin:0 0 6px; font-size:20px; }
+  .sheet p { margin:0 0 16px; color:var(--muted); }
+  .steps { list-style:none; padding:0; margin:0 0 18px; }
+  .steps li { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:14px; }
+  .n { flex:none; width:22px; height:22px; border-radius:50%; background:var(--soft); color:var(--green); font-weight:700; font-size:12px; display:grid; place-items:center; }
+  .gap { height:10px; }
+  .banner { background:var(--amber); color:var(--amberInk); border-radius:12px; padding:10px 12px; font-size:14px; margin-bottom:14px; display:flex; gap:8px; }
+  .tag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--amberInk); background:var(--amber); border-radius:6px; padding:2px 6px; }
+  .row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-top:1px solid var(--line); }
+  .row:first-of-type { border-top:0; }
+  .row small { color:var(--muted); display:block; }
+  .tog { width:44px; height:26px; border-radius:999px; background:#d1d5db; position:relative; opacity:.6; }
+  .tog::after { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; }
+  .tog.on { background:#a3d34a; }
+  .tog.on::after { left:21px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="col">
+    <p class="cap">1 · Tap "Connect Google", signed out</p>
+    <div class="phone">
+      <div class="nav"><span class="logo">W</span> WhipScribe</div>
+      <div class="pad">
+        <h1>Your meetings, transcribed automatically.</h1>
+        <p class="lead">Connect your calendar once. The transcript lands in your library when the meeting ends.</p>
+        <div class="card"><h3>Google Calendar</h3><p>Read-only access. We never change your events.</p><button class="btn">Connect Google →</button></div>
+      </div>
+      <div class="sheet-bg"></div>
+      <div class="sheet" role="dialog" aria-labelledby="s1">
+        <div class="grab"></div>
+        <h2 id="s1">Sign in to connect your calendar</h2>
+        <p>Your calendar links to your WhipScribe account, so meeting transcripts land in your library.</p>
+        <ol class="steps">
+          <li><span class="n">1</span>Sign in or create a free account</li>
+          <li><span class="n">2</span>Allow read-only access in Google</li>
+          <li><span class="n">3</span>Pick which meetings the notetaker joins</li>
+        </ol>
+        <button class="btn">Continue with Google</button>
+        <div class="gap"></div>
+        <button class="btn ghost">Sign in with email</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <p class="cap">2 · If a preview stays, it says so</p>
+    <div class="phone">
+      <div class="nav"><span class="logo">W</span> WhipScribe</div>
+      <div class="pad">
+        <div class="banner" role="note">ⓘ <span><b>Example calendar.</b> Nothing is connected and nothing is recording. Connect yours to see your real meetings.</span></div>
+        <div class="card">
+          <h3>How it looks once connected <span class="tag">Example</span></h3>
+          <div class="row"><div>Q3 review<small>Today 12:48 · Google Meet</small></div><span class="tog on" aria-hidden="true"></span></div>
+          <div class="row"><div>1:1 onboarding sync<small>Today 16:26 · Zoom</small></div><span class="tog on" aria-hidden="true"></span></div>
+          <div class="row"><div>Customer interview<small>Tomorrow 14:26 · Teams</small></div><span class="tog" aria-hidden="true"></span></div>
+        </div>
+        <button class="btn">Connect my calendar</button>
+        <div class="gap"></div>
+        <button class="btn ghost">See a real meeting transcript</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
